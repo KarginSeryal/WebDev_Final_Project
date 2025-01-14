@@ -55,6 +55,22 @@ const textareaEl = document.getElementById("post-input")
 const postButtonEl = document.getElementById("post-btn")
 
 
+// INPUT FIELDS
+
+const mainCategory = document.getElementById("main-category")
+const affected = document.getElementById("affected")
+const description = document.getElementById("description")
+const attemptedSolution = document.getElementById("attemptedSolution")
+const isAdmin = document.getElementById("isAdmin")
+const roomFloor = document.getElementById("floor")
+const roomWing = document.getElementById("wing")
+const roomNum = document.getElementById("roomNumber")
+const affectedTerminals = document.getElementById("affectedTerminals")
+const teacher = document.getElementById("teacherName")
+const date = document.getElementById("date")
+
+
+
 
 /* == UI - Event Listeners == */
 
@@ -202,7 +218,6 @@ function clearInputField() {
 }
 
 function postButtonPressed() {
-    const postBody = textareaEl.value
     const user = auth.currentUser
 
     if (postBody) {
@@ -223,8 +238,7 @@ try {
       body: postBody,
       uid: user.uid,
       createdAt: serverTimestamp()
-    /* Challenge: Add a field called 'createdAt' where you save the time of creation of this post as a timestamp.
-    You'll need to use the serverTimestamp function, which needs to be imported from "firebase/firestore" first. */
+
     });    
     console.log("Document written with ID: ", docRef.id);
     console.log("Post User UID: " + user.uid)
