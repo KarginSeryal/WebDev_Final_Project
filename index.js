@@ -57,11 +57,11 @@ const postButtonEl = document.getElementById("post-btn")
 
 // INPUT FIELDS
 
-const mainCategory = document.getElementById("main-category")
-const affected = document.getElementById("affected")
+const mainCategory = document.getElementById("main-category") // DROPDOWN
+const peopleAffected = document.getElementById("affected")
 const description = document.getElementById("description")
 const attemptedSolution = document.getElementById("attemptedSolution")
-const isAdmin = document.getElementById("isAdmin")
+const needAdmin = document.getElementById("isAdmin")
 const roomFloor = document.getElementById("floor")
 const roomWing = document.getElementById("wing")
 const roomNum = document.getElementById("roomNumber")
@@ -225,19 +225,29 @@ function postButtonPressed() {
         clearInputField(textareaEl)
     }
  }
- 
+
  
 
  /* = Functions - Firebase - Cloud Firestore = */
 
 
-async function addPostToDB(postBody, user) {
+async function addPostToDB(postBody, user, peopleAffected, description, attemptedSolution, isAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
 
 try {
     const docRef = await addDoc(collection(db, "Posts"), {
       body: postBody,
       uid: user.uid,
-      createdAt: serverTimestamp()
+      ticketDate: serverTimestamp(),
+      peopleAffected: peopleAffected,
+      description: description,
+      attemptedSolution: attemptedSolution,
+      needAdmin: needAdmin, 
+      roomFloor: roomFloor,
+      roomWing: roomWing,
+      roomNum: roomNum,
+      affectedTerminals: affectedTerminals,
+      teacher: teacher,
+      date: date
 
     });    
     console.log("Document written with ID: ", docRef.id);
