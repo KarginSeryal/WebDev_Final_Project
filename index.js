@@ -28,7 +28,7 @@ const firebaseConfig = {
   const db = getFirestore(app);
   console.log(db)
 
-  console.log(app.options.projectIdq)
+  console.log(app.options.projectId)
 
 
 /* === UI === */
@@ -52,7 +52,7 @@ const userProfilePictureEl = document.getElementById("user-profile-picture")
 const userGreetingEl = document.getElementById("user-greeting")
 
 const textareaEl = document.getElementById("post-input")
-const postButtonEl = document.getElementById("post-btn")
+const submitButtonEl = document.getElementById("post-btn")
 
 
 // INPUT FIELDS
@@ -61,7 +61,7 @@ const mainCategory = document.getElementById("main-category") // DROPDOWN
 const peopleAffected = document.getElementById("affected")
 const description = document.getElementById("description")
 const attemptedSolution = document.getElementById("attemptedSolution")
-const needAdmin = document.getElementById("needAdmin")
+const needAdmin = document.getElementsByName("needAdmin")
 const roomFloor = document.getElementById("floor")
 const roomWing = document.getElementById("wing")
 const roomNum = document.getElementById("roomNumber")
@@ -105,6 +105,23 @@ onAuthStateChanged(auth, (user) => {
 
 
 /* === Functions === */
+
+function getRadioValue() {
+    for (const radio of needAdmin) {
+      if (radio.checked) {
+        let selectedValue = radio.value
+        break
+      }
+    }
+    if (selectedValue) {
+        return selectedValue
+        console.log('Selected Value:', selectedValue)
+    } else {
+        return "unsure"
+        console.log('No option selected')
+    }
+  }
+  
 
 /* = Functions - Firebase - Authentication = */
 
@@ -214,15 +231,36 @@ function hideView(view) {
 }
 
 function clearInputField() {
-    textareaEl.value=""
+    mainCategory.value=""
+    peopleAffected.value=""
+    description.value=""
+    attemptedSolution.value=""
+    needAdmin.value=""
+    roomFloor.value=""
+    roomWing.value=""
+    roomNum.value=""
+    affectedTerminals=""
+    teacher.value=""
+    date.value=""
 }
 
 function submitButtonPressed() {
     const user = auth.currentUser
+    const cat = mainCategory.value
+    const pA = peopleAffected.value
+    const desc = description.value
+    const aS = attemptedSolution.value
+    const nA = needAdmin.getRadioValue()
+    const rF = roomFloor.value
+    const rW = roomWing.value
+    const rN = roomNum.value
+    const aT = affectedTerminals.value
+    const t = teacher.value
+    const d = date.value
 
     if (postBody) {
-        addTicketToDB(postBody, user)
-        clearInputField(textareaEl)
+        addTicketToDB(postBody, user, cat, pA, decodeURI, aS, nA, rF, rW, rN, aT, t, d)
+        clearInputField()
     }
  }
 
@@ -231,11 +269,10 @@ function submitButtonPressed() {
  /* = Functions - Firebase - Cloud Firestore = */
 
 
-async function addTicketToDB(postBody, user, category, peopleAffected, description, attemptedSolution, isAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
+async function addTicketToDB(user, category, peopleAffected, description, attemptedSolution, needAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
 
 try {
     const docRef = await addDoc(collection(db, "Posts"), {
-      body: postBody,
       uid: user.uid,
       ticketDate: serverTimestamp(),
       peopleAffected: peopleAffected,
