@@ -6,6 +6,8 @@ body{
     flex-direction: column;
     width: 200px;
 }
-
+.dropdownMenu{
+    width: 100px;
+}
 
 
