@@ -81,7 +81,7 @@ createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 
 signOutButtonEl.addEventListener("click", authSignOut)
 
-postButtonEl.addEventListener("click", postButtonPressed)
+submitButtonEl.addEventListener("click", submitButtonPressed)
 
 /* === Main Code === */
 
@@ -217,11 +217,11 @@ function clearInputField() {
     textareaEl.value=""
 }
 
-function postButtonPressed() {
+function submitButtonPressed() {
     const user = auth.currentUser
 
     if (postBody) {
-        addPostToDB(postBody, user)
+        addTicketToDB(postBody, user)
         clearInputField(textareaEl)
     }
  }
@@ -231,7 +231,7 @@ function postButtonPressed() {
  /* = Functions - Firebase - Cloud Firestore = */
 
 
-async function addPostToDB(postBody, user, category, peopleAffected, description, attemptedSolution, isAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
+async function addTicketToDB(postBody, user, category, peopleAffected, description, attemptedSolution, isAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
 
 try {
     const docRef = await addDoc(collection(db, "Posts"), {
