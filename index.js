@@ -61,7 +61,7 @@ const mainCategory = document.getElementById("main-category") // DROPDOWN
 const peopleAffected = document.getElementById("affected")
 const description = document.getElementById("description")
 const attemptedSolution = document.getElementById("attemptedSolution")
-const needAdmin = document.getElementById("isAdmin")
+const needAdmin = document.getElementById("needAdmin")
 const roomFloor = document.getElementById("floor")
 const roomWing = document.getElementById("wing")
 const roomNum = document.getElementById("roomNumber")
@@ -231,7 +231,7 @@ function postButtonPressed() {
  /* = Functions - Firebase - Cloud Firestore = */
 
 
-async function addPostToDB(postBody, user, peopleAffected, description, attemptedSolution, isAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
+async function addPostToDB(postBody, user, category, peopleAffected, description, attemptedSolution, isAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
 
 try {
     const docRef = await addDoc(collection(db, "Posts"), {
