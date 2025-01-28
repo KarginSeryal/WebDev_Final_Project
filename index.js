@@ -272,19 +272,20 @@ async function addTicketToDB(postBody, user, category, peopleAffected, descripti
 
 try {
     const docRef = await addDoc(collection(db, "Posts"), {
-      uid: user.uid,
-      mainCategory: category,
-      ticketDate: serverTimestamp(),
-      peopleAffected: peopleAffected,
-      description: description,
-      attemptedSolution: attemptedSolution,
-      needAdmin: needAdmin, 
-      roomFloor: roomFloor,
-      roomWing: roomWing,
-      roomNum: roomNum,
-      affectedTerminals: affectedTerminals,
-      teacher: teacher,
-      date: date
+        body: postBody,
+        uid: user.uid,
+        mainCategory: category,
+        ticketDate: serverTimestamp(),
+        peopleAffected: peopleAffected,
+        description: description,
+        attemptedSolution: attemptedSolution,
+        needAdmin: needAdmin, 
+        roomFloor: roomFloor,
+        roomWing: roomWing,
+        roomNum: roomNum,
+        affectedTerminals: affectedTerminals,
+        teacher: teacher,
+        date: date
 
     });    
     console.log("Document written with ID: ", docRef.id);
