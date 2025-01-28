@@ -51,8 +51,7 @@ const signOutButtonEl = document.getElementById("sign-out-btn")
 const userProfilePictureEl = document.getElementById("user-profile-picture")
 const userGreetingEl = document.getElementById("user-greeting")
 
-const textareaEl = document.getElementById("post-input")
-const submitButtonEl = document.getElementById("post-btn")
+const submitButtonEl = document.getElementById("submitButton")
 
 
 // INPUT FIELDS
@@ -84,7 +83,7 @@ submitButtonEl.addEventListener("click", submitButtonPressed)
 
 /* === Main Code === */
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user) => {``
   if (user) {
     // User is signed in, see docs for 
     // a list of available properties
