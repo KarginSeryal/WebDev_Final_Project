@@ -80,7 +80,6 @@ signInButtonEl.addEventListener("click", authSignInWithEmail)
 createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 
 signOutButtonEl.addEventListener("click", authSignOut)
-
 submitButtonEl.addEventListener("click", submitButtonPressed)
 
 /* === Main Code === */
@@ -259,7 +258,7 @@ function submitButtonPressed() {
     const d = date.value
 
     if (postBody) {
-        addTicketToDB(postBody, user, cat, pA, decodeURI, aS, nA, rF, rW, rN, aT, t, d)
+        addTicketToDB(postBody, user, cat, pA, desc, aS, nA, rF, rW, rN, aT, t, d)
         clearInputField()
     }
  }
@@ -269,11 +268,12 @@ function submitButtonPressed() {
  /* = Functions - Firebase - Cloud Firestore = */
 
 
-async function addTicketToDB(user, category, peopleAffected, description, attemptedSolution, needAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
+async function addTicketToDB(postBody, user, category, peopleAffected, description, attemptedSolution, needAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
 
 try {
     const docRef = await addDoc(collection(db, "Posts"), {
       uid: user.uid,
+      mainCategory: category,
       ticketDate: serverTimestamp(),
       peopleAffected: peopleAffected,
       description: description,
