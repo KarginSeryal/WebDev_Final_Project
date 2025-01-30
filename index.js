@@ -80,18 +80,20 @@ submitButtonEl.addEventListener("click", submitButtonPressed)
 
 /* === Main Code === */
 
-onAuthStateChanged(auth, (user) => {``
+onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for
     showLoggedInView()
     showProfilePicture(userProfilePictureEl, user)
     showUserGreeting(userGreetingEl, user)
+    console.log("User is signed in")
+
 
     const uid = user.uid;
     // ...
   } else {
     showLoggedOutView()
-    // User is signed out
+    console.log("User is signed out")
     // ...
   }
 });
@@ -117,7 +119,6 @@ function getRadioValue() {
   
 
 /* = Functions - Firebase - Authentication = */
-``
 
 function authCreateAccountWithEmail() {
     console.log("Sign up with email and password")
@@ -127,6 +128,7 @@ function authCreateAccountWithEmail() {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         showLoggedInView()
+        console.log("Account create: success")
     })
     .catch((error) => {
         console.error(error.message)
