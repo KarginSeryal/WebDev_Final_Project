@@ -19,16 +19,16 @@ const firebaseConfig = {
 
     appId: "1:733618698014:web:e91ec3a5e39b1759d5fb0f"
 
- };
+  };
 
-  const app= initializeApp(firebaseConfig)
-  const auth = getAuth(app)
-  console.log(auth)
+const app= initializeApp(firebaseConfig)
+const auth = getAuth(app)
+console.log(auth)
 
-  const db = getFirestore(app);
-  console.log(db)
+const db = getFirestore(app);
+console.log(db)
 
-  console.log(app.options.projectId)
+console.log(app.options.projectId)
 
 
 /* === UI === */
@@ -38,8 +38,6 @@ const firebaseConfig = {
 
 const viewLoggedOut = document.getElementById("logged-out-view")
 const viewLoggedIn = document.getElementById("logged-in-view")
-
-const signInWithGoogleButtonEl = document.getElementById("sign-in-with-google-btn")
 
 const emailInputEl = document.getElementById("email-input")
 const passwordInputEl = document.getElementById("password-input")
@@ -73,7 +71,6 @@ const date = document.getElementById("date")
 
 /* == UI - Event Listeners == */
 
-signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
 
 signInButtonEl.addEventListener("click", authSignInWithEmail)
 createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
@@ -83,20 +80,20 @@ submitButtonEl.addEventListener("click", submitButtonPressed)
 
 /* === Main Code === */
 
-onAuthStateChanged(auth, (user) => {``
+onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for 
-    // a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
+    // User is signed in, see docs for
     showLoggedInView()
     showProfilePicture(userProfilePictureEl, user)
     showUserGreeting(userGreetingEl, user)
+    console.log("User is signed in")
+
 
     const uid = user.uid;
     // ...
   } else {
     showLoggedOutView()
-    // User is signed out
+    console.log("User is signed out")
     // ...
   }
 });
@@ -123,10 +120,6 @@ function getRadioValue() {
 
 /* = Functions - Firebase - Authentication = */
 
-function authSignInWithGoogle() {
-    console.log("Sign in with Google")
-}
-
 function authCreateAccountWithEmail() {
     console.log("Sign up with email and password")
     const email = emailInputEl.value
@@ -135,6 +128,7 @@ function authCreateAccountWithEmail() {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         showLoggedInView()
+        console.log("Account create: success")
     })
     .catch((error) => {
         console.error(error.message)
