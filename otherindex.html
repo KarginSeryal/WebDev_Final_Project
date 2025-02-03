@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"></script>
+
+    <title>TechTicket</title>
+</head>
+<body>
+    <section id="logged-out-view" style="display: none;">
+        <div class="container">
+            <h1 class="app-title">Tech Ticket App</h1>
+
+            <div class="auth-fields-and-buttons">
+                <input id="email-input" type="email" placeholder="Email">
+                <input id="password-input" type="password" placeholder="Password">
+
+                <button id="sign-in-btn" class="primary-btn">Sign in</button>
+                <button id="create-account-btn" class="secondary-btn">Create Account</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="logged-in-view" style="display: none;">
+        <img src="images/bths_logo.png">
+        <div class="container">
+            <!-- log out button-->
+            <nav>
+                <button id="sign-out-btn" class="icon-btn">
+                    <img src="assets/icons/logOut.jpg" class="icon-img-btn">
+                </button>
+            </nav>
+
+            <div class="app-container">
+                <div class="user-section">
+                    <img id="user-profile-picture">
+                    <h2 id="user-greeting"></h2>
+                </div>
+            </div>
+            <div class="post-section">
+                <div id="select-1">
+                    <label for="main-category">Main category</label><br>
+                    <select id="main-category" class="dropdownMenu">
+                        <option>Hardware</option>
+                        <option>Software</option>
+                        <option>Smartboard</option>
+                        <option>Wires</option>
+                        <option>Keyboard/Mouse</option>
+                        <option>Internet Connection</option>
+                        <option>Operating System</option>
+                        <option>Printer</option>
+                        <option>Copier</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div id="select-2">
+                    <label for="affected">Who does this affect?</label><br>
+                    <select id="affected" class="dropdownMenu">
+                        <option>Whole classroom</option>
+                        <option>Teacher station</option>
+                        <option>Teacher laptop</option>
+                        <option>3 or less computers</option>
+                        <option>more than 3 student computers</option>
+                        <option>Other piece of equipment</option>
+                    </select>
+                </div>
+                <div id="write-1">
+                    <label for="description">Give a detailed description of the issue down below.</label><br>
+                    <input id="description" type="text" class="textIssue">
+                </div>
+                <div id="write-2">
+                    <label for="attemptedSolution">Write down anything you've tried to solve the issue<br>and whether or not it had any effect.</label><br>
+                    <input id="attemptedSolution" type="text" class="textIssue">
+                </div>
+                <div id="MCQ-1">
+                    <label for="needAdmin"></label>Do you need or think you need admin permissions to solve this issue.<br>
+                    <input type="radio" name="needAdmin">yes<br>
+                    <input type="radio" name="needAdmin">no<br>
+                    <input type="radio" name="needAdmin">I don't know<br>
+                </div>
+                <div id="select-3"> 
+                    <label for="roomFloor"></label>On what floor is this issue?<br>
+                    <select id="roomFloor" class="dropdownMenu">
+                        <option>B</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                    </select>
+                </div>
+                <div id="select-4">
+                    <label for="roomWing"></label>Which wing is your room in?<br>
+                    <select id="roomWing" class="dropdownMenu">
+                        <option>North</option>
+                        <option>East</option>
+                        <option>South</option>
+                        <option>West</option>
+                        <option>Center</option>
+                    </select>
+                </div>
+                <div id="select-5">
+                    <label for="roomNum"></label>What's the room number?<br>
+                    <select id="roomNum" class="dropdownMenu">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                    </select>
+                </div>
+                <div id="write-3">
+                    <label for="affectedTerminals"></label>Which computers are affected?<br>
+                    <input id="affectedTerminals" type="text" class="textIssue">
+                </div>
+                <div id="write-4">
+                    <label for="teacherName"></label>Teacher name?<br>
+                    <input id="teacherName" type="text" class="textIssue">
+                </div>
+                <div id="submitButton">
+                    <button id="submit-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>
