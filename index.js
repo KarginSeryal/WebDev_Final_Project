@@ -239,7 +239,7 @@ function submitButtonPressed() {
     const pA = peopleAffected.value
     const desc = description.value
     const aS = attemptedSolution.value
-    const nA = needAdmin.getRadioValue()
+    const nA = getRadioValue()
     const rF = roomFloor.value
     const rW = roomWing.value
     const rN = roomNum.value
