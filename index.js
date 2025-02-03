@@ -49,7 +49,7 @@ const signOutButtonEl = document.getElementById("sign-out-btn")
 const userProfilePictureEl = document.getElementById("user-profile-picture")
 const userGreetingEl = document.getElementById("user-greeting")
 
-const submitButtonEl = document.getElementById("submitButton")
+const submitButtonEl = document.getElementById("submit-btn")
 
 
 // INPUT FIELDS
@@ -102,20 +102,16 @@ onAuthStateChanged(auth, (user) => {
 /* === Functions === */
 
 function getRadioValue() {
-    for (const radio of needAdmin) {
-      if (radio.checked) {
-        let selectedValue = radio.value
-        break
-      }
-    }
-    if (selectedValue) {
-        return selectedValue
-        console.log('Selected Value:', selectedValue)
-    } else {
-        return "unsure"
-        console.log('No option selected')
+  for (const radio of needAdmin) {
+    if (radio.checked) {
+      let selectedValue = radio.value;
+      return selectedValue; // Move return statement inside if block
     }
   }
+  console.log('No option selected');
+  return "unsure";
+}
+
   
 
 /* = Functions - Firebase - Authentication = */
