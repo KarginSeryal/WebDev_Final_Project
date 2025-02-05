@@ -11,6 +11,13 @@ body {
     width: 200px;
 }
 
+.container {
+    position:absolute;
+    margin-top: 200px;
+    margin-left: 400px;
+
+}
+
 #logged-in-view{
 
 }

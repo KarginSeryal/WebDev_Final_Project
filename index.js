@@ -157,43 +157,6 @@ function authSignOut() {
     })
 }
 
-function showProfilePicture(imgElement, user) {
-    if (user !== null) {
-        // The user object has basic properties such as display name, email, etc.
-        const photoURL = user.photoURL;
-        if (user.photoURL) {
-            imgElement.src = photoURL
-        } else {
-            imgElement.src = "assets/images/defaultPic.jpg"
-        }
-
-        // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-        const uid = user.uid;
-    } else {
-        imgElement.src = "assets/images/defaultPic.jpg"
-    }
-}
- 
- 
-function showUserGreeting(element, user) {
-    if (user !== null) {
-        // The user object has basic properties such as display name, email, etc.
-        const displayName = user.displayName;
-
-        if (displayName) {
-            element.textContent = "Hi " + displayName 
-        } else {
-            element.textContent = "Hi friend, how are you?"
-        }
-        // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-    }
- }
- 
-
 
 /* == Functions - UI Functions == */
 
