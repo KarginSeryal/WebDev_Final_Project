@@ -6,12 +6,13 @@ body {
 .auth-fields-and-buttons {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    margin-top: 500px;
     width: 200px;
 }
 
 #logged-in-view{
-    position: absolute;
-    margin-top: 800px;
+
 }
 
 #logged-out-view{
@@ -40,6 +41,10 @@ body {
 
 }
 
+#logout-btn{
+    height: 30px;
+}
+
 #title {
     background-color: white;
     width: 100%;
@@ -62,8 +67,9 @@ body {
     border-style: solid;
     border-left: 0;
     border-right: 0;
-    border-bottom: 20px;
-    border-top: 20px;
+    border-bottom: 200px;
+    border-top: 200px;
+    border-color: blue;
     position: absolute;
     display: block;
     width: auto;
