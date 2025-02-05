@@ -65,7 +65,7 @@ const roomWing = document.getElementById("roomWing")
 const roomNum = document.getElementById("roomNum")
 const affectedTerminals = document.getElementById("affectedTerminals")
 const teacher = document.getElementById("teacherName")
-const date = document.getElementById("date")
+const date = document.getElementById("dateInp")
 
 
 
@@ -220,6 +220,7 @@ function hideView(view) {
 }
 
 function clearInputField() {
+    date.value=""
     mainCategory.value=""
     peopleAffected.value=""
     description.value=""
@@ -228,14 +229,15 @@ function clearInputField() {
     roomFloor.value=""
     roomWing.value=""
     roomNum.value=""
-    affectedTerminals=""
+    affectedTerminals.value=""
     teacher.value=""
     date.value=""
 }
 
 function submitButtonPressed() {
-    const user = auth.currentUser
+    const user = auth.currentUser.uid
     const cat = mainCategory.value
+    const time = serverTimestamp()
     const pA = peopleAffected.value
     const desc = description.value
     const aS = attemptedSolution.value
@@ -247,8 +249,8 @@ function submitButtonPressed() {
     const t = teacher.value
     const d = date.value
 
-    if (postBody) {
-        addTicketToDB(postBody, user, cat, pA, desc, aS, nA, rF, rW, rN, aT, t, d)
+    if (user) {
+        addTicketToDB(user, cat, time, pA, desc, aS, nA, rF, rW, rN, aT, t, d)
         clearInputField()
     }
  }
@@ -258,14 +260,13 @@ function submitButtonPressed() {
  /* = Functions - Firebase - Cloud Firestore = */
 
 
-async function addTicketToDB(postBody, user, category, peopleAffected, description, attemptedSolution, needAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
+async function addTicketToDB(user, category, time, peopleAffected, description, attemptedSolution, needAdmin, roomFloor, roomWing, roomNum, affectedTerminals, teacher, date) {
 
 try {
-    const docRef = await addDoc(collection(db, "Posts"), {
-        body: postBody,
-        uid: user.uid,
+    const docRef = await addDoc(collection(db, category), {
+        uid: user,
         mainCategory: category,
-        ticketDate: serverTimestamp(),
+        ticketDate: time,
         peopleAffected: peopleAffected,
         description: description,
         attemptedSolution: attemptedSolution,
